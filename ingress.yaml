@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: planning-app
+  namespace: planning-app
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: a5676c3264381410c9dd9e42008f376b-7617b6600e27f059.elb.us-east-1.amazonaws.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: planning-app
+                port:
+                  number: 80
+
