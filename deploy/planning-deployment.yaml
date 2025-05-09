@@ -6,7 +6,7 @@ metadata:
   labels:
     app: planning-app
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: planning-app
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: planning-app
-        image: 100foldtechnologies/planning-app:v3
+        image: 100foldtechnologies/planning-app:v1
         ports:
         - containerPort: 80
         resources:

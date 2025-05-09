@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: planning-app-canary
+  namespace: planning-app
+  labels:
+    app: planning-app-canary
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: planning-app-canary
+  template:
+    metadata:
+      labels:
+        app: planning-app-canary
+    spec:
+      containers:
+      - name: planning-app-canary
+        image: 100foldtechnologies/planning-app:v2
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 300Mi
+
+
+
