@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: planning-app
+  namespace: planning-app
+  labels:
+    app: planning-app
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: planning-app
+  template:
+    metadata:
+      labels:
+        app: planning-app
+    spec:
+      containers:
+      - name: planning-app
+        image: 100foldtechnologies/planning-app:v3
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 300Mi
+
+
+
