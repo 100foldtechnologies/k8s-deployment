@@ -75,6 +75,8 @@ spec:
               memory: 128Mi
   strategy:
     canary:
+      rollbackWindow:
+        duration: 5m
       steps:
         - setWeight: 20
         - pause: { duration: 30s }
