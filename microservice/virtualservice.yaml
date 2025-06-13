@@ -1,20 +1,13 @@
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: emailservice-vs
 spec:
   hosts:
-    - emailservice 
+    - emailservice  # or whatever your host is (e.g. emailservice.default.svc.cluster.local)
   http:
-    - name: primary  
+    - name: primary
       route:
         - destination:
             host: emailservice
-            port:
-              number: 5000
           weight: 100
-        - destination:
-            host: emailservice-canary
-            port:
-              number: 5000
-          weight: 0
