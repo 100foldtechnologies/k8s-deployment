@@ -46,8 +46,7 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
-              drop:
-                - ALL
+              drop: [ALL]
             privileged: false
             readOnlyRootFilesystem: true
           image: us-central1-docker.pkg.dev/google-samples/microservices-demo/emailservice:v0.10.3
@@ -75,6 +74,14 @@ spec:
               memory: 128Mi
   strategy:
     canary:
+      trafficRouting:
+        istio:
+          virtualService:
+            name: emailservice-vs
+            routes:
+              - primary
+          stableService: emailservice
+          canaryService: emailservice-canary
       rollbackWindow:
         duration: 5m
       steps:
