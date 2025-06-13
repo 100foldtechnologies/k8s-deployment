@@ -18,8 +18,8 @@
 
 # [START gke_release_kubernetes_manifests_microservices_demo]
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: emailservice
   labels:
@@ -93,8 +93,8 @@ kind: ServiceAccount
 metadata:
   name: emailservice
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: checkoutservice
   labels:
@@ -175,8 +175,8 @@ kind: ServiceAccount
 metadata:
   name: checkoutservice
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: recommendationservice
   labels:
@@ -252,8 +252,8 @@ kind: ServiceAccount
 metadata:
   name: recommendationservice
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: frontend
   labels:
@@ -380,8 +380,8 @@ kind: ServiceAccount
 metadata:
   name: frontend
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: paymentservice
   labels:
@@ -453,8 +453,8 @@ kind: ServiceAccount
 metadata:
   name: paymentservice
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: productcatalogservice
   labels:
@@ -526,8 +526,8 @@ kind: ServiceAccount
 metadata:
   name: productcatalogservice
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: cartservice
   labels:
@@ -600,8 +600,8 @@ kind: ServiceAccount
 metadata:
   name: cartservice
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: redis-cart
   labels:
@@ -669,8 +669,8 @@ spec:
     port: 6379
     targetPort: 6379
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: loadgenerator
   labels:
@@ -756,8 +756,8 @@ kind: ServiceAccount
 metadata:
   name: loadgenerator
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: currencyservice
   labels:
@@ -830,8 +830,8 @@ kind: ServiceAccount
 metadata:
   name: currencyservice
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: shippingservice
   labels:
@@ -903,8 +903,8 @@ kind: ServiceAccount
 metadata:
   name: shippingservice
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: adservice
   labels:
