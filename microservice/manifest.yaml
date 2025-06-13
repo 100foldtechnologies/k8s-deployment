@@ -25,6 +25,10 @@ metadata:
   labels:
     app: emailservice
 spec:
+  revisionHistoryLimit: 1
+  rollbackWindow:
+    revisions: 1
+  progressDeadlineSeconds: 300
   replicas: 2
   selector:
     matchLabels:
@@ -74,21 +78,30 @@ spec:
               memory: 128Mi
   strategy:
     canary:
+      stableService: emailservice
+      canaryService: emailservice-canary
+      scaleDownDelaySeconds: 300
+      scaleDownDelayRevisionLimit: 1
       trafficRouting:
         istio:
           virtualService:
             name: emailservice-vs
             routes:
               - primary
-          stableService: emailservice
-          canaryService: emailservice-canary
-      rollbackWindow:
-        duration: 5m
+      maxSurge: 25%
+      maxUnavailable: 0
       steps:
-        - setWeight: 20
-        - pause: { duration: 30s }
+        - setWeight: 10
+        - pause: {}
+        - setWeight: 25
+        - pause:
+            duration: 60
         - setWeight: 50
-        - pause: { duration: 30s }
+        - pause:
+            duration: 60
+        - setWeight: 90
+        - pause:
+            duration: 60
         - setWeight: 100
 
 ---
