@@ -633,6 +633,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: cartservice
+
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
@@ -641,6 +642,7 @@ metadata:
   labels:
     app: redis-cart
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: redis-cart
@@ -655,47 +657,43 @@ spec:
         runAsNonRoot: true
         runAsUser: 1000
       containers:
-      - name: redis
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-              - ALL
-          privileged: false
-          readOnlyRootFilesystem: true
-        image: redis:alpine
-        ports:
-        - containerPort: 6379
-        readinessProbe:
-          periodSeconds: 5
-          tcpSocket:
-            port: 6379
-        livenessProbe:
-          periodSeconds: 5
-          tcpSocket:
-            port: 6379
-        volumeMounts:
-        - mountPath: /data
-          name: redis-data
-        resources:
-          limits:
-            memory: 256Mi
-            cpu: 125m
-          requests:
-            cpu: 70m
-            memory: 200Mi
+        - name: redis
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+          image: redis:alpine
+          ports:
+            - containerPort: 6379
+          readinessProbe:
+            periodSeconds: 5
+            tcpSocket:
+              port: 6379
+          livenessProbe:
+            periodSeconds: 5
+            tcpSocket:
+              port: 6379
+          volumeMounts:
+            - mountPath: /data
+              name: redis-data
+          resources:
+            limits:
+              memory: 256Mi
+              cpu: 125m
+            requests:
+              cpu: 70m
+              memory: 200Mi
+      volumes:
+        - name: redis-data
+          emptyDir: {}
   strategy:
     canary:
       steps:
-        - setWeight: 20
-        - pause: { duration: 30s }
-        - setWeight: 50
-        - pause: { duration: 30s }
-        - setWeight: 100
-      
-      volumes:
-      - name: redis-data
-        emptyDir: {}
+        - setW
+
 ---
 apiVersion: v1
 kind: Service
