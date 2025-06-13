@@ -4,10 +4,13 @@ metadata:
   name: emailservice-vs
 spec:
   hosts:
-    - emailservice  # or whatever your host is (e.g. emailservice.default.svc.cluster.local)
+    - emailservice.default.svc.cluster.local
   http:
     - name: primary
       route:
         - destination:
             host: emailservice
           weight: 100
+        - destination:
+            host: emailservice-canary
+          weight: 0
