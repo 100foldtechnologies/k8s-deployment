@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: emailservice
+spec:
+  hosts:
+    - emailservice 
+  http:
+    - name: primary  
+      route:
+        - destination:
+            host: emailservice
+            port:
+              number: 5000
+          weight: 100
+        - destination:
+            host: emailservice-canary
+            port:
+              number: 5000
+          weight: 0
