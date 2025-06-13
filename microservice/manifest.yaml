@@ -1045,15 +1045,6 @@ spec:
           limits:
             cpu: 300m
             memory: 300Mi
-  strategy:
-    canary:
-      steps:
-        - setWeight: 20
-        - pause: { duration: 30s }
-        - setWeight: 50
-        - pause: { duration: 30s }
-        - setWeight: 100
-        
         readinessProbe:
           initialDelaySeconds: 20
           periodSeconds: 15
@@ -1064,6 +1055,14 @@ spec:
           periodSeconds: 15
           grpc:
             port: 9555
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: { duration: 30s }
+        - setWeight: 50
+        - pause: { duration: 30s }
+        - setWeight: 100
 ---
 apiVersion: v1
 kind: Service
